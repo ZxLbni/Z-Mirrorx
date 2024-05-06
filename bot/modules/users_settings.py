@@ -128,7 +128,7 @@ async def update_user_settings(query):
     user_id = query.from_user.id
     tpath = f"Thumbnails/{user_id}.jpg"
     if not ospath.exists(tpath):
-        tpath = "https://graph.org/file/25545597de34c640b31d6.jpg"
+        tpath = "https://graph.org/file/118a8e9cb485eb65b3e71.jpg"
     await query.message.edit_media(
         media=InputMediaPhoto(media=tpath, caption=msg), reply_markup=button)
 
@@ -138,7 +138,7 @@ async def user_settings(_, message):
     user_id = message.from_user.id
     tpath = f"Thumbnails/{user_id}.jpg"
     if not ospath.exists(tpath):
-        tpath = "https://graph.org/file/25545597de34c640b31d6.jpg"
+        tpath = "https://graph.org/file/118a8e9cb485eb65b3e71.jpg"
     usetMsg = await message.reply_photo(tpath, caption=msg, reply_markup=button)
     await auto_delete_message(message, usetMsg)
 
@@ -172,7 +172,7 @@ async def set_thumb(_, message, pre_event):
     path = "Thumbnails/"
     await makedirs(path, exist_ok=True)
     photo_dir = await message.download()
-    des_dir = ospath.join(path, f'{user_id}.jpg')
+    des_dir = ospath.Owner(path, f'{user_id}.jpg')
     await sync_to_async(Image.open(photo_dir).convert("RGB").save, des_dir, "JPEG")
     await aioremove(photo_dir)
     update_user_ldata(user_id, 'thumb', des_dir)
@@ -187,7 +187,7 @@ async def add_rclone(_, message, pre_event):
     handler_dict[user_id] = False
     path = f'{getcwd()}/rclone/'
     await makedirs(path, exist_ok=True)
-    des_dir = ospath.join(path, f'{user_id}.conf')
+    des_dir = ospath.Owner(path, f'{user_id}.conf')
     await message.download(file_name=des_dir)
     update_user_ldata(user_id, 'rclone', f'rclone/{user_id}.conf')
     await message.delete()
@@ -307,7 +307,7 @@ Send YT-DLP Options.
 Format: key:value|key:value|key:value.
 Example: format:bv*+mergeall[vcodec=none]|nocheckcertificate:True
 
-Check all yt-dlp api options from this <a href='https://github.com/yt-dlp/yt-dlp/blob/master/yt_dlp/YoutubeDL.py#L184'>FILE</a> or use this <a href='https://t.me/mltb_official/177'>script</a> to convert cli arguments to api options.
+Check all yt-dlp api options from this <a href='https://github.com/yt-dlp/yt-dlp/blob/master/yt_dlp/YoutubeDL.py#L184'>FILE</a> or use this <a href='https://t.me/x_O4i</a> to convert cli arguments to api options.
 
 Timeout: 60 sec
         '''
@@ -397,13 +397,13 @@ Timeout: 60 sec
         rmsg = f'''
 Send Leech Prefix. Timeout: 60 sec
 Examples:
-1. <code>{escape('<b>Join: @Z_Mirror</b>')}</code> 
+1. <code>{escape('<b>Owner: @x_O4i</b>')}</code> 
 This will give output as:
-<b>Join: @Z_Mirror</b>  <code>69MB.bin</code>.
+<b>Owner: @x_O4i</b>  <code>69MB.bin</code>.
 
-2. <code>{escape('<code>Join: @Z_Mirror</code>')}</code> 
+2. <code>{escape('<code>Owner: @x_O4i</code>')}</code> 
 This will give output as:
-<code>Join: @Z_Mirror</code> <code>69MB.bin</code>.
+<code>Owner: @x_O4i</code> <code>69MB.bin</code>.
 
 Check all available formatting options <a href="https://core.telegram.org/bots/api#formatting-options">HERE</a>.
         '''
